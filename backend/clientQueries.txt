@@ -1,0 +1,115 @@
+# Write your query or mutation here
+#query getAll { 
+#   users{
+#     _id
+#     firstname
+#   }
+# }
+
+query getAllQuote{
+  quotes{
+    name
+    by
+   
+  }
+}
+
+query getAllUserWithQuote{
+  users{
+    _id
+    firstname
+    lastname
+    email
+    
+    quotes{
+      name
+      by
+    }
+  }
+}
+
+query getUserById{
+  {
+	user(_id:"2002"){
+    _id
+    firstname
+    lastname
+    email
+  }
+}
+}
+
+
+query getQuotebyUserId{
+  {
+	quote(by:"2002"){
+    name
+   
+  }
+}
+}
+
+
+        {-----------generic values-----------
+
+        query getQuotebyUserId($userId:ID!)
+          {
+          quote(by:$userId){
+            name
+          
+          }
+        }
+
+        queryVariable--- {
+          "userId": "2002"
+        }}
+
+
+--------------mutations 
+//can use this one appraoch also
+ // type Mutation{
+  //      signupUserDummy(firstname:String!,lastname:String!,email:String!,password:String!):User
+  //  }
+
+
+
+
+
+mutation createUser{
+  signupUserDummy(firstname:"Deepak",lastname:"binwal",email:"Binwalp36@gmail.com",password:"123456"){
+    _id
+    email
+    firstname
+    lastname
+  }
+}
+
+
+
+-------------
+mutation createUser($user: UserInput!){
+  signupUserDummy(newUser:$user){         //if want to give alias use it like       user:signupUserDummy(){}
+    _id
+    email
+    firstname
+    lastname
+  }
+}
+
+query variables
+{
+  "user": {
+    "firstname": "dpk",
+    "lastname": "binwal",
+    "email": "dpbi@gmil.com",
+    "password": "12345"
+    
+  }
+}
+
+
+
+
+
+
+------------
